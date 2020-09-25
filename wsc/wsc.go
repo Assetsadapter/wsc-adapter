@@ -43,6 +43,10 @@ const (
 	TRNAS_AMOUNT_UNIT_ETHER        = 7
 )
 
+var(
+	Decimals = 8
+)
+
 func ConvertFloatStringToBigInt(amount string, decimals int) (*big.Int, error) {
 	vDecimal, _ := decimal.NewFromString(amount)
 	//if err != nil {
@@ -70,22 +74,7 @@ func ConvertFloatStringToBigInt(amount string, decimals int) (*big.Int, error) {
 }
 
 func ConvertEthStringToWei(amount string) (*big.Int, error) {
-	//log.Debug("amount:", amount)
-	// vDecimal, err := decimal.NewFromString(amount)
-	// if err != nil {
-	// 	log.Error("convert from string to decimal failed, err=", err)
-	// 	return nil, err
-	// }
-
-	// ETH, _ := decimal.NewFromString(strings.Replace("1,000,000,000,000,000,000", ",", "", -1))
-	// vDecimal = vDecimal.Mul(ETH)
-	// rst := new(big.Int)
-	// if _, valid := rst.SetString(vDecimal.String(), 10); !valid {
-	// 	log.Error("conver to big.int failed")
-	// 	return nil, errors.New("conver to big.int failed")
-	// }
-	//return rst, nil
-	return ConvertFloatStringToBigInt(amount, 18)
+	return ConvertFloatStringToBigInt(amount, Decimals)
 }
 
 func ConvertAmountToFloatDecimal(amount string, decimals int) (decimal.Decimal, error) {
@@ -97,36 +86,14 @@ func ConvertAmountToFloatDecimal(amount string, decimals int) (decimal.Decimal, 
 
 	damount := d.Shift(-int32(decimals))
 	return damount, nil
-
-	//if decimals <= 0 || decimals > 30 {
-	//	return d, errors.New("wrong decimal input through ")
-	//}
-	//
-	//decimalInt := big.NewInt(1)
-	//for i := 0; i < decimals; i++ {
-	//	decimalInt.Mul(decimalInt, big.NewInt(10))
-	//}
-	//
-	//w, _ := decimal.NewFromString(decimalInt.String())
-	//d = d.Div(w)
-	//return d, nil
 }
 
 func ConverWeiStringToEthDecimal(amount string) (decimal.Decimal, error) {
-	// d, err := decimal.NewFromString(amount)
-	// if err != nil {
-	// 	log.Error("convert string to deciaml failed, err=", err)
-	// 	return d, err
-	// }
-
-	// ETH, _ := decimal.NewFromString(strings.Replace("1,000,000,000,000,000,000", ",", "", -1))
-	// d = d.Div(ETH)
-	// return d, nil
-	return ConvertAmountToFloatDecimal(amount, 18)
+	return ConvertAmountToFloatDecimal(amount, Decimals)
 }
 
 func ConverEthDecimalToWei(amount decimal.Decimal) (*big.Int, error) {
-	return ConvertFloatStringToBigInt(amount.String(), 18)
+	return ConvertFloatStringToBigInt(amount.String(), Decimals)
 }
 
 func toHexBigIntForEtherTrans(value string, base int, unit int64) (*big.Int, error) {
@@ -156,22 +123,6 @@ func toHexBigIntForEtherTrans(value string, base int, unit int64) (*big.Int, err
 
 	return amount, nil
 }
-
-/*func (this *WalletManager) SaveTransaction(tx *BlockTransaction) error {
-	db, err := OpenDB(DbPath, BLOCK_CHAIN_DB)
-	if err != nil {
-		this.Log.Errorf("open db for save block failed, err=%v", err)
-		return err
-	}
-	defer db.Close()
-
-	err = db.Save(tx)
-	if err != nil {
-		this.Log.Errorf("save block transaction failed, err = %v", err)
-		return err
-	}
-	return nil
-}*/
 
 func (this *WalletManager) RecoverUnscannedTransactions(unscannedTxs []*openwallet.UnscanRecord) ([]BlockTransaction, error) {
 	allTxs := make([]BlockTransaction, 0, len(unscannedTxs))

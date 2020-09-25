@@ -21,7 +21,7 @@ import (
 )
 
 //SaveLocalBlockHead 记录区块高度和hash到本地
-func (bs *ETHBLockScanner) SaveLocalBlockHead(blockHeight uint64, blockHash string) error {
+func (bs *WSCBLockScanner) SaveLocalBlockHead(blockHeight uint64, blockHash string) error {
 
 	if bs.BlockchainDAI == nil {
 		return fmt.Errorf("Blockchain DAI is not setup ")
@@ -38,7 +38,7 @@ func (bs *ETHBLockScanner) SaveLocalBlockHead(blockHeight uint64, blockHash stri
 }
 
 //GetLocalBlockHead 获取本地记录的区块高度和hash
-func (bs *ETHBLockScanner) GetLocalBlockHead() (uint64, string, error) {
+func (bs *WSCBLockScanner) GetLocalBlockHead() (uint64, string, error) {
 
 	if bs.BlockchainDAI == nil {
 		return 0, "", fmt.Errorf("Blockchain DAI is not setup ")
@@ -53,7 +53,7 @@ func (bs *ETHBLockScanner) GetLocalBlockHead() (uint64, string, error) {
 }
 
 //SaveLocalBlock 记录本地新区块
-func (bs *ETHBLockScanner) SaveLocalBlock(blockHeader *EthBlock) error {
+func (bs *WSCBLockScanner) SaveLocalBlock(blockHeader *WscBlock) error {
 
 	if bs.BlockchainDAI == nil {
 		return fmt.Errorf("Blockchain DAI is not setup ")
@@ -70,7 +70,7 @@ func (bs *ETHBLockScanner) SaveLocalBlock(blockHeader *EthBlock) error {
 }
 
 //GetLocalBlock 获取本地区块数据
-func (bs *ETHBLockScanner) GetLocalBlock(height uint64) (*EthBlock, error) {
+func (bs *WSCBLockScanner) GetLocalBlock(height uint64) (*WscBlock, error) {
 
 	if bs.BlockchainDAI == nil {
 		return nil, fmt.Errorf("Blockchain DAI is not setup ")
@@ -81,7 +81,7 @@ func (bs *ETHBLockScanner) GetLocalBlock(height uint64) (*EthBlock, error) {
 		return nil, err
 	}
 
-	block := &EthBlock{
+	block := &WscBlock{
 		BlockHeader: BlockHeader{
 			BlockHash:       header.Hash,
 			BlockHeight:     header.Height,
@@ -92,7 +92,7 @@ func (bs *ETHBLockScanner) GetLocalBlock(height uint64) (*EthBlock, error) {
 }
 
 //SaveUnscanRecord 保存交易记录到钱包数据库
-func (bs *ETHBLockScanner) SaveUnscanRecord(record *openwallet.UnscanRecord) error {
+func (bs *WSCBLockScanner) SaveUnscanRecord(record *openwallet.UnscanRecord) error {
 
 	if bs.BlockchainDAI == nil {
 		return fmt.Errorf("Blockchain DAI is not setup ")
@@ -102,7 +102,7 @@ func (bs *ETHBLockScanner) SaveUnscanRecord(record *openwallet.UnscanRecord) err
 }
 
 //DeleteUnscanRecord 删除指定高度的未扫记录
-func (bs *ETHBLockScanner) DeleteUnscanRecord(height uint64) error {
+func (bs *WSCBLockScanner) DeleteUnscanRecord(height uint64) error {
 
 	if bs.BlockchainDAI == nil {
 		return fmt.Errorf("Blockchain DAI is not setup ")
@@ -113,7 +113,7 @@ func (bs *ETHBLockScanner) DeleteUnscanRecord(height uint64) error {
 
 
 //DeleteUnscanRecordByID 删除指定的未扫记录
-func (bs *ETHBLockScanner) DeleteUnscanRecordByID(id string) error {
+func (bs *WSCBLockScanner) DeleteUnscanRecordByID(id string) error {
 
 	if bs.BlockchainDAI == nil {
 		return fmt.Errorf("Blockchain DAI is not setup ")
@@ -123,7 +123,7 @@ func (bs *ETHBLockScanner) DeleteUnscanRecordByID(id string) error {
 }
 
 
-func (bs *ETHBLockScanner) GetUnscanRecords() ([]*openwallet.UnscanRecord, error) {
+func (bs *WSCBLockScanner) GetUnscanRecords() ([]*openwallet.UnscanRecord, error) {
 
 	if bs.BlockchainDAI == nil {
 		return nil, fmt.Errorf("Blockchain DAI is not setup ")
@@ -135,6 +135,6 @@ func (bs *ETHBLockScanner) GetUnscanRecords() ([]*openwallet.UnscanRecord, error
 
 //SupportBlockchainDAI 支持外部设置区块链数据访问接口
 //@optional
-func (bs *ETHBLockScanner) SupportBlockchainDAI() bool {
+func (bs *WSCBLockScanner) SupportBlockchainDAI() bool {
 	return true
 }

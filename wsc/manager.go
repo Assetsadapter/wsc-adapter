@@ -30,7 +30,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/tidwall/gjson"
 
@@ -462,38 +461,37 @@ func (this *txFeeInfo) CalcFee() error {
 
 func (this *WalletManager) GetTransactionFeeEstimated(from string, to string, value *big.Int, data string) (*txFeeInfo, error) {
 
-	var (
-		gasLimit *big.Int
-		err      error
-	)
-	if this.Config.FixGasLimit.Cmp(big.NewInt(0)) > 0 {
-		//配置设置固定gasLimit
-		gasLimit = this.Config.FixGasLimit
-	} else {
-		//动态计算gas消耗
-		gasLimit, err = this.WalletClient.ethGetGasEstimated(makeGasEstimatePara(from, to, value, data))
-		if err != nil {
-			this.Log.Errorf(fmt.Sprintf("get gas limit failed, err = %v\n", err))
-			return nil, err
-		}
-	}
-
-	gasPrice, err := this.WalletClient.ethGetGasPrice()
-	if err != nil {
-		this.Log.Errorf(fmt.Sprintf("get gas price failed, err = %v\n", err))
-		return nil, err
-	}
-
+	//var (
+	//	gasLimit *big.Int
+	//	err      error
+	//)
+	//if this.Config.FixGasLimit.Cmp(big.NewInt(0)) > 0 {
+	//	//配置设置固定gasLimit
+	//	gasLimit = this.Config.FixGasLimit
+	//} else {
+	//	//动态计算gas消耗
+	//	gasLimit, err = this.WalletClient.ethGetGasEstimated(makeGasEstimatePara(from, to, value, data))
+	//	if err != nil {
+	//		this.Log.Errorf(fmt.Sprintf("get gas limit failed, err = %v\n", err))
+	//		return nil, err
+	//	}
+	//}
+	//
+	//gasPrice, err := this.WalletClient.wscGetGasPrice()
+	//if err != nil {`
+	//	this.Log.Errorf(fmt.Sprintf("get gas price failed, err = %v\n", err))
+	//	return nil, err
+	//}
 	//	fee := new(big.Int)
 	//	fee.Mul(gasLimit, gasPrice)
 
 	feeInfo := &txFeeInfo{
-		GasLimit: gasLimit,
-		GasPrice: gasPrice,
-		//		Fee:      fee,
+		GasLimit: big.NewInt(0),
+		GasPrice: big.NewInt(0),
+		Fee:      big.NewInt(0),
 	}
 
-	feeInfo.CalcFee()
+	//feeInfo.CalcFee()
 	return feeInfo, nil
 }
 
@@ -504,7 +502,7 @@ func (this *WalletManager) GetERC20TokenTransactionFeeEstimated(from string, to 
 		return nil, err
 	}
 
-	gasPrice, err := ethGetGasPrice()
+	gasPrice, err := wscGetGasPrice()
 	if err != nil {
 		this.Log.Errorf(fmt.Sprintf("get gas price failed, err = %v\n", err))
 		return nil, err
@@ -529,7 +527,7 @@ func (this *WalletManager) GetSimpleTransactionFeeEstimated(from string, to stri
 		return nil, err
 	}
 
-	gasPrice, err := ethGetGasPrice()
+	gasPrice, err := wscGetGasPrice()
 	if err != nil {
 		this.Log.Errorf(fmt.Sprintf("get gas price failed, err = %v\n", err))
 		return nil, err
@@ -656,7 +654,7 @@ func verifyTransaction(nonce uint64, to string, amount *big.Int, gasLimit uint64
 	return nil
 }
 
-func (this *Client) ethGetGasPrice() (*big.Int, error) {
+func (this *Client) wscGetGasPrice() (*big.Int, error) {
 	params := []interface{}{}
 	result, err := this.Call("eth_gasPrice", 1, params)
 	if err != nil {
@@ -679,7 +677,7 @@ func (this *Client) ethGetGasPrice() (*big.Int, error) {
 }
 
 func (this *WalletManager) GetNonceForAddress2(address string) (uint64, error) {
-	address = AppendOxToAddress(address)
+	//address = AppendOxToAddress(address)
 	//txpool, err := this.WalletClient.EthGetTxPoolContent()
 	//if err != nil {
 	//	this.Log.Errorf("EthGetTxPoolContent failed, err = %v", err)
@@ -693,13 +691,14 @@ func (this *WalletManager) GetNonceForAddress2(address string) (uint64, error) {
 	//}
 	//log.Debugf("sequent max nonce:%v", max)
 	//log.Debugf("sequent nonce count:%v", count)
-	txCount, err := this.WalletClient.ethGetTransactionCount(address)
-	if err != nil {
-		log.Error("ethGetTransactionCount failed, err=", err)
-		return 0, err
-	}
-	log.Debugf("txCount:%v", txCount)
-	return txCount, nil
+	//txCount, err := this.WalletClient.ethGetTransactionCount(address)
+	//if err != nil {
+	//	log.Error("ethGetTransactionCount failed, err=", err)
+	//	return 0, err
+	//}
+	//log.Debugf("txCount:%v", txCount)
+	// 没有获取地址nonce的接口，直接设为0，项目方说是联盟链，为0也可以验证通过
+	return 0, nil
 	//if count == 0 || max < txCount {
 	//	return txCount, nil
 	//}
@@ -707,30 +706,31 @@ func (this *WalletManager) GetNonceForAddress2(address string) (uint64, error) {
 }
 
 func (this *WalletManager) GetNonceForAddress(address string) (uint64, error) {
-	txpool, err := this.WalletClient.EthGetTxPoolContent()
-	if err != nil {
-		this.Log.Errorf("EthGetTxPoolContent failed, err = %v", err)
-		return 0, err
-	}
+	//txpool, err := this.WalletClient.EthGetTxPoolContent()
+	//if err != nil {
+	//	this.Log.Errorf("EthGetTxPoolContent failed, err = %v", err)
+	//	return 0, err
+	//}
+	//
+	//txCount := txpool.GetPendingTxCountForAddr(address)
+	//this.Log.Infof("address[%v] has %v tx in pending queue of txpool.", address, txCount)
+	//for txCount > 0 {
+	//	time.Sleep(time.Second * 1)
+	//	txpool, err = this.WalletClient.EthGetTxPoolContent()
+	//	if err != nil {
+	//		this.Log.Errorf("EthGetTxPoolContent failed, err = %v", err)
+	//		return 0, err
+	//	}
+	//
+	//	txCount = txpool.GetPendingTxCountForAddr(address)
+	//	this.Log.Infof("address[%v] has %v tx in pending queue of txpool.", address, txCount)
+	//}
 
-	txCount := txpool.GetPendingTxCountForAddr(address)
-	this.Log.Infof("address[%v] has %v tx in pending queue of txpool.", address, txCount)
-	for txCount > 0 {
-		time.Sleep(time.Second * 1)
-		txpool, err = this.WalletClient.EthGetTxPoolContent()
-		if err != nil {
-			this.Log.Errorf("EthGetTxPoolContent failed, err = %v", err)
-			return 0, err
-		}
-
-		txCount = txpool.GetPendingTxCountForAddr(address)
-		this.Log.Infof("address[%v] has %v tx in pending queue of txpool.", address, txCount)
-	}
-
-	nonce, err := this.WalletClient.ethGetTransactionCount(address)
-	if err != nil {
-		this.Log.Errorf("ethGetTransactionCount failed, err=%v", err)
-		return 0, err
-	}
-	return nonce, nil
+	//nonce, err := this.WalletClient.ethGetTransactionCount(address)
+	//if err != nil {
+	//	this.Log.Errorf("ethGetTransactionCount failed, err=%v", err)
+	//	return 0, err
+	//}
+	// 没有获取nonce值的接口，nonce直接可以设为0。项目方说可以验证通过
+	return 0, nil
 }

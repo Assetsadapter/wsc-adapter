@@ -19,16 +19,16 @@ import "testing"
 
 func TestWalletManager_GetTokenBalanceByAddress(t *testing.T) {
 	tm := NewWalletManager()
-	baseAPI := "http://47.106.255.174:10001"
+	baseAPI := "http://chain3.wscbank.com:9000"
 	client := &Client{BaseURL: baseAPI, Debug: true}
 	tm.WalletClient = client
 	tm.Config.ChainID = 1
 
 	addrs := []AddrBalanceInf{
-		&AddrBalance{Address: "0xd1ffd8c9b59b6c2696ebdaa143c73226ea34d02c", Index: 0},
+		&AddrBalance{Address: "0x709971d6e9e70ad45df87f34375baa5a22a1f929", Index: 0},
 	}
 
-	err := tm.GetTokenBalanceByAddress("0x4092678e4E78230F46A1534C0fbc8fA39780892B", addrs...)
+	err := tm.GetTokenBalanceByAddress("0xbaeec028b1f9eda0b6b015a437999634c3dd114b", addrs...)
 	if err != nil {
 		t.Errorf("unexpected error: %v", err)
 		return

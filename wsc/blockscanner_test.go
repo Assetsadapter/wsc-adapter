@@ -16,8 +16,9 @@
 package wsc
 
 import (
-	"github.com/blocktree/openwallet/log"
 	"testing"
+
+	"github.com/blocktree/openwallet/log"
 )
 
 func TestWalletManager_EthGetTransactionByHash(t *testing.T) {
@@ -34,7 +35,7 @@ func TestWalletManager_EthGetTransactionByHash(t *testing.T) {
 func TestWalletManager_ethGetTransactionReceipt(t *testing.T) {
 	wm := testNewWalletManager()
 	txid := "0x5d5c8e90621947c9f81ddbf97e2fc32436a936562faff404f71d6186bb801752"
-	tx, err := wm.WalletClient.EthGetTransactionReceipt(txid)
+	tx, err := wm.WalletClient.WscGetTransactionReceipt(txid)
 	if err != nil {
 		t.Errorf("get transaction by has failed, err=%v", err)
 		return
@@ -44,9 +45,9 @@ func TestWalletManager_ethGetTransactionReceipt(t *testing.T) {
 
 func TestWalletManager_EthGetBlockNumber(t *testing.T) {
 	wm := testNewWalletManager()
-	maxBlockHeight, err := wm.WalletClient.EthGetBlockNumber()
+	maxBlockHeight, err := wm.WalletClient.WscGetBlockNumber()
 	if err != nil {
-		t.Errorf("EthGetBlockNumber failed, err=%v", err)
+		t.Errorf("WscGetBlockNumber failed, err=%v", err)
 		return
 	}
 	log.Infof("maxBlockHeight: %v", maxBlockHeight)

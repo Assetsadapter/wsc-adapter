@@ -2,9 +2,10 @@ package wsc
 
 import (
 	"errors"
-	"github.com/blocktree/openwallet/common"
 	"math/big"
 	"strings"
+
+	"github.com/blocktree/openwallet/common"
 
 	"github.com/blocktree/openwallet/log"
 	"github.com/blocktree/openwallet/openwallet"
@@ -31,7 +32,7 @@ func (this *AddrBalance) GetAddress() string {
 }
 
 func (this *AddrBalance) ValidTokenBalance() bool {
-	if this.Balance == nil {
+	if this.Balance == nil && this.TokenBalance == nil {
 		return false
 	}
 	return true

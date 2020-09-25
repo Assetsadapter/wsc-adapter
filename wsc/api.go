@@ -48,53 +48,49 @@ type Response struct {
 
 /*
 1. eth block example
-   "result": {
-        "difficulty": "0x1a4f1f",
-        "extraData": "0xd98301080d846765746888676f312e31302e338664617277696e",
-        "gasLimit": "0x47e7c4",
-        "gasUsed": "0x5b61",
-        "hash": "0x85319757555e1cf069684dde286e3c34331dc27d2e54bed24e7291f1b84a0cc5",
-        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "miner": "0x50068fd632c1a6e6c5bd407b4ccf8861a589e776",
-        "mixHash": "0xb0cb0abb00c3fc77014abb2a520e3d2a14047cfa30a3b954f18fbeefd1a92f7b",
-        "nonce": "0x4df323f58b7a7fd0",
-        "number": "0x169cf",
-        "parentHash": "0x3df7035473ec98c8c18d2785d5a345193a32b95fcf1ac2d3f09a93109feed3bc",
-        "receiptsRoot": "0x441a5be885777bfdf0e985a8ef5046316b3384dd49db7ef95b2c546611c1e2fc",
-        "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
-        "size": "0x2aa",
-        "stateRoot": "0xb0d76a848be723c72c9639b2de591320f4456b665354995be08a8fa83897efbb",
-        "timestamp": "0x5b7babbe",
-        "totalDifficulty": "0x2a844e200a",
-        "transactions": [
-            {
-                "blockHash": "0x85319757555e1cf069684dde286e3c34331dc27d2e54bed24e7291f1b84a0cc5",
-                "blockNumber": "0x169cf",
-                "from": "0x50068fd632c1a6e6c5bd407b4ccf8861a589e776",
-                "gas": "0x15f90",
-                "gasPrice": "0x430e23400",
-                "hash": "0x925e33ac3ebaf40bb44a843860b6589ea2df78c955a27f9df16edcf789519671",
-                "input": "0x70a082310000000000000000000000002a63b2203955b84fefe52baca3881b3614991b34",
-                "nonce": "0x45",
-                "to": "0x8847e5f841458ace82dbb0692c97115799fe28d3",
-                "transactionIndex": "0x0",
-                "value": "0x0",
-                "v": "0x3c",
-                "r": "0x8d2ffbe7cb7ac1159a999dfa4352fa27f5cce0df8755254393838aab229ecd33",
-                "s": "0xe8ed1f7f8de902ccb008824fe39b2903b94f89e3ea0d5b9f9b880c302bae6cf"
-            }
-        ],
-        "transactionsRoot": "0xa8cb62696679bc3d72762bd2aa5842fdd8aed9c9691fe82064c13e854c13d5cb",
-        "uncles": []
-    }
+  "result": {
+    "dbHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "extraData": [],
+    "gasLimit": "0x0",
+    "gasUsed": "0x0",
+    "hash": "0x99576e7567d258bd6426ddaf953ec0c953778b2f09a078423103c6555aa4362d",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "number": 1,
+    "parentHash": "0x4f6394763c33c1709e5a72b202ad4d7a3b8152de3dc698cef6f675ecdaf20a3b",
+    "receiptsRoot": "0x69a04fa6073e4fc0947bac7ee6990e788d1e2c5ec0fe6c2436d0892e7f3c09d2",
+    "sealer": "0x2",
+    "sealerList": [
+      "11e1be251ca08bb44f36fdeedfaeca40894ff80dfd80084607a75509edeaf2a9c6fee914f1e9efda571611cf4575a1577957edfd2baa9386bd63eb034868625f",
+      "78a313b426c3de3267d72b53c044fa9fe70c2a27a00af7fea4a549a7d65210ed90512fc92b6194c14766366d434235c794289d66deff0796f15228e0e14a9191",
+      "95b7ff064f91de76598f90bc059bec1834f0d9eeb0d05e1086d49af1f9c2f321062d011ee8b0df7644bd54c4f9ca3d8515a3129bbb9d0df8287c9fa69552887e",
+      "b8acb51b9fe84f88d670646be36f31c52e67544ce56faf3dc8ea4cf1b0ebff0864c6b218fdcd9cf9891ebd414a995847911bd26a770f429300085f37e1131f36"
+    ],
+    "signatureList": [
+      {
+        "index": "0x2",
+        "signature": "0xae098aabc63a53b8dcb57da9a87f13aebf231bfe1704da88f125cee6b4b30ee0609d0720a97bed1900b96bc3e7a63584158340b5b7f802945241f61731f9358900"
+      },
+      {
+        "index": "0x0",
+        "signature": "0x411cb93f816549eba82c3bf8c03fa637036dcdee65667b541d0da06a6eaea80d16e6ca52bf1b08f77b59a834bffbc124c492ea7a1601d0c4fb257d97dc97cea600"
+      },
+      {
+        "index": "0x3",
+        "signature": "0xb5b41e49c0b2bf758322ecb5c86dc3a3a0f9b98891b5bbf50c8613a241f05f595ce40d0bb212b6faa32e98546754835b057b9be0b29b9d0c8ae8b38f7487b8d001"
+      }
+    ],
+    "stateRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "timestamp": "0x173ad8703d6",
+    "transactionsRoot": "0xb563f70188512a085b5607cac0c35480336a566de736c83410a062c9acc785ad"
+  }
 */
 
-type EthBlock struct {
+type WscBlock struct {
 	BlockHeader
 	Transactions []BlockTransaction `json:"transactions"`
 }
 
-func (this *EthBlock) CreateOpenWalletBlockHeader() *openwallet.BlockHeader {
+func (this *WscBlock) CreateOpenWalletBlockHeader() *openwallet.BlockHeader {
 	header := &openwallet.BlockHeader{
 		Hash:              this.BlockHash,
 		Previousblockhash: this.PreviousHash,
@@ -104,12 +100,18 @@ func (this *EthBlock) CreateOpenWalletBlockHeader() *openwallet.BlockHeader {
 	return header
 }
 
-func (this *EthBlock) Init() error {
+func (this *WscBlock) Init() error {
 	var err error
 	this.BlockHeight, err = strconv.ParseUint(removeOxFromHex(this.BlockNumber), 16, 64) //ConvertToBigInt(this.BlockNumber, 16) //
 	if err != nil {
 		log.Errorf("init blockheight failed, err=%v", err)
 		return err
+	}
+
+	// 加载到账地址, 到账金额， 需要在交易的input中解析
+	for i, transaction := range this.Transactions {
+		this.Transactions[i].To = "0x" + transaction.Data[34:74]
+		this.Transactions[i].Value = "0x" + transaction.Data[74:]
 	}
 	return nil
 }
@@ -237,13 +239,14 @@ func (this *Client) EthGetTxPoolContent() (*TxpoolContent, error) {
 	return &txpool, nil
 }
 
-func (this *Client) EthGetTransactionReceipt(transactionId string) (*EthTransactionReceipt, error) {
+func (this *Client) WscGetTransactionReceipt(transactionId string) (*EthTransactionReceipt, error) {
 	params := []interface{}{
+		1,
 		transactionId,
 	}
 
 	var txReceipt EthTransactionReceipt
-	result, err := this.Call("eth_getTransactionReceipt", 1, params)
+	result, err := this.Call("getTransactionReceipt", 1, params)
 	if err != nil {
 		//errInfo := fmt.Sprintf("get block[%v] failed, err = %v \n", blockNumStr,  err)
 		log.Errorf("get tx[%v] receipt failed, err = %v \n", transactionId, err)
@@ -266,12 +269,12 @@ func (this *Client) EthGetTransactionReceipt(transactionId string) (*EthTransact
 
 }
 
-func (this *Client) ethGetBlockSpecByHash(blockHash string, showTransactionSpec bool) (*EthBlock, error) {
+func (this *Client) ethGetBlockSpecByHash(blockHash string, showTransactionSpec bool) (*WscBlock, error) {
 	params := []interface{}{
 		blockHash,
 		showTransactionSpec,
 	}
-	var ethBlock EthBlock
+	var ethBlock WscBlock
 
 	result, err := this.Call("eth_getBlockByHash", 1, params)
 	if err != nil {
@@ -329,14 +332,15 @@ func (this *Client) EthGetTransactionByHash(txid string) (*BlockTransaction, err
 	return &tx, nil
 }
 
-func (this *Client) ethGetBlockSpecByBlockNum2(blockNum string, showTransactionSpec bool) (*EthBlock, error) {
+func (this *Client) wscGetBlockSpecByBlockNum2(blockNum string, showTransactionSpec bool) (*WscBlock, error) {
 	params := []interface{}{
+		1,
 		blockNum,
 		showTransactionSpec,
 	}
-	var ethBlock EthBlock
+	var ethBlock WscBlock
 
-	result, err := this.Call("eth_getBlockByNumber", 1, params)
+	result, err := this.Call("getBlockByNumber", 1, params)
 	if err != nil {
 		//errInfo := fmt.Sprintf("get block[%v] failed, err = %v \n", blockNumStr,  err)
 		log.Errorf("get block[%v] failed, err = %v \n", blockNum, err)
@@ -361,9 +365,9 @@ func (this *Client) ethGetBlockSpecByBlockNum2(blockNum string, showTransactionS
 	return &ethBlock, nil
 }
 
-func (this *Client) EthGetBlockSpecByBlockNum(blockNum uint64, showTransactionSpec bool) (*EthBlock, error) {
+func (this *Client) WscGetBlockSpecByBlockNum(blockNum uint64, showTransactionSpec bool) (*WscBlock, error) {
 	blockNumStr := "0x" + strconv.FormatUint(blockNum, 16)
-	return this.ethGetBlockSpecByBlockNum2(blockNumStr, showTransactionSpec)
+	return this.wscGetBlockSpecByBlockNum2(blockNumStr, showTransactionSpec)
 }
 
 func (this *Client) ethGetTxpoolStatus() (uint64, uint64, error) {
@@ -463,25 +467,25 @@ func (this *Client) ERC20GetAddressBalance2(address string, contractAddr string,
 		log.Errorf("make transaction data failed, err = %v", err)
 		return nil, err
 	}
-
+	trans["from"] = contractAddr
 	trans["to"] = contractAddr
 	trans["data"] = data
 	params := []interface{}{
+		1,
 		trans,
-		"latest",
 	}
-	result, err := this.Call("eth_call", 1, params)
+	result, err := this.Call("call", 1, params)
 	if err != nil {
 		log.Errorf(fmt.Sprintf("get addr[%v] erc20 balance failed, err=%v\n", address, err))
 		return big.NewInt(0), err
 	}
-	if result.Type != gjson.String {
+	if result.Type != gjson.JSON {
 		errInfo := fmt.Sprintf("get addr[%v] erc20 balance result type error, result type is %v\n", address, result.Type)
 		log.Errorf(errInfo)
 		return big.NewInt(0), errors.New(errInfo)
 	}
 
-	balance, err := ConvertToBigInt(result.String(), 16)
+	balance, err := ConvertToBigInt(result.Get("output").String(), 16)
 	if err != nil {
 		errInfo := fmt.Sprintf("convert addr[%v] erc20 balance format to bigint failed, response is %v, and err = %v\n", address, result.String(), err)
 		log.Errorf(errInfo)
@@ -727,24 +731,25 @@ func (this *WalletManager) SendTransactionToAddr(param map[string]interface{}) (
 	return txId, nil
 }
 
-func (this *WalletManager) EthSendRawTransaction(signedTx string) (string, error) {
-	return this.WalletClient.ethSendRawTransaction(signedTx)
+func (this *WalletManager) WscSendRawTransaction(signedTx string) (string, error) {
+	return this.WalletClient.wscSendRawTransaction(signedTx)
 }
 
-func (this *Client) ethSendRawTransaction(signedTx string) (string, error) {
+func (this *Client) wscSendRawTransaction(signedTx string) (string, error) {
 	params := []interface{}{
+		1,
 		signedTx,
 	}
 
-	result, err := this.Call("eth_sendRawTransaction", 1, params)
+	result, err := this.Call("sendRawTransaction", 1, params)
 	if err != nil {
 		log.Errorf(fmt.Sprintf("start raw transaction faield, err = %v \n", err))
 		return "", err
 	}
 
 	if result.Type != gjson.String {
-		log.Errorf("eth_sendRawTransaction result type error")
-		return "", errors.New("eth_sendRawTransaction result type error")
+		log.Errorf("sendRawTransaction result type error")
+		return "", errors.New("sendRawTransaction result type error")
 	}
 	return result.String(), nil
 }
@@ -829,9 +834,9 @@ func (this *Client) ethGetAccounts() ([]string, error) {
 	return accounts, nil
 }
 
-func (this *Client) EthGetBlockNumber() (uint64, error) {
-	param := make([]interface{}, 0)
-	result, err := this.Call("eth_blockNumber", 1, param)
+func (this *Client) WscGetBlockNumber() (uint64, error) {
+	param := []interface{}{1}
+	result, err := this.Call("getBlockNumber", 1, param)
 	if err != nil {
 		log.Errorf("get block number faield, err = %v \n", err)
 		return 0, err
@@ -851,6 +856,34 @@ func (this *Client) EthGetBlockNumber() (uint64, error) {
 	return blockNum, nil
 }
 
+func (this *Client) SerializationTransaction(from, to, amount, blockNum, addr string) (string, error) {
+	params := []interface{}{
+		1,
+		struct {
+			From        string `json:"from"`
+			To          string `json:"to"`
+			BlockNumber string `json:"blockNumber"`
+			Address     string `json:"address"`
+			Amount      string `json:"amount"`
+		}{
+			From:        from,
+			To:          to,
+			Amount:      amount,
+			BlockNumber: blockNum,
+			Address:     addr,
+		},
+	}
+	result, err := this.Call2("getSerializationTx", 1, params)
+	if err != nil {
+		return "", err
+	}
+	if result.Type != gjson.String {
+		log.Errorf("result of serialization transaction type error")
+		return "", errors.New("result of serialization transaction type error")
+	}
+	return result.String(), nil
+}
+
 func (c *Client) Call(method string, id int64, params []interface{}) (*gjson.Result, error) {
 	authHeader := req.Header{
 		"Accept":       "application/json",
@@ -866,7 +899,7 @@ func (c *Client) Call(method string, id int64, params []interface{}) (*gjson.Res
 		log.Debug("Start Request API...")
 	}
 
-	r, err := req.Post(c.BaseURL, req.BodyJSON(&body), authHeader)
+	r, err := req.Post(fmt.Sprintf("%s/%s", c.BaseURL, method), req.BodyJSON(&body), authHeader)
 
 	if c.Debug {
 		log.Debug("Request API Completed")
@@ -887,6 +920,49 @@ func (c *Client) Call(method string, id int64, params []interface{}) (*gjson.Res
 	}
 
 	result := resp.Get("result")
+
+	return &result, nil
+}
+
+func (c *Client) Call2(method string, id int64, params []interface{}) (*gjson.Result, error) {
+	authHeader := req.Header{
+		"Accept":       "application/json",
+		"Content-Type": "application/json",
+	}
+	body := make(map[string]interface{}, 0)
+	body["jsonrpc"] = "2.0"
+	body["id"] = id
+	body["method"] = method
+	body["params"] = params
+
+	if c.Debug {
+		log.Debug("Start Request API...")
+	}
+
+	r, err := req.Post(fmt.Sprintf("%s/%s", "http://127.0.0.1:9000", method), req.BodyJSON(&body), authHeader)
+
+	if c.Debug {
+		log.Debug("Request API Completed")
+	}
+
+	if c.Debug {
+		log.Debugf("%+v\n", r)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp := gjson.ParseBytes(r.Bytes())
+	//err = isError(&resp)
+	//if err != nil {
+	//	return nil, err
+	//}
+	if err != nil {
+		return nil, err
+	}
+
+	result := resp.Get("data")
 
 	return &result, nil
 }
