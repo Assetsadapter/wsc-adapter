@@ -409,11 +409,11 @@ func (this *WscTransactionDecoder) CreateErc20TokenRawTransaction(wrapper openwa
 
 		amount, _ := ConvertFloatStringToBigInt(amountStr, tokenDecimals)
 
-		//if addrBalance_BI.Cmp(amount) < 0 {
-		//	errTokenBalance = fmt.Sprintf("the token balance of all addresses is not enough")
-		//	tokenBalanceNotEnough = true
-		//	continue
-		//}
+		if addrBalance_BI.Cmp(amount) < 0 {
+			errTokenBalance = fmt.Sprintf("the token balance of all addresses is not enough")
+			tokenBalanceNotEnough = true
+			continue
+		}
 
 		data, createErr := makeERC20TokenTransData(contractAddress, to, amount)
 		if createErr != nil {
