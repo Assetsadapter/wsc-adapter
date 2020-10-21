@@ -492,97 +492,6 @@ func (this *WSCBLockScanner) MakeSimpleToExtractData(tx *BlockTransaction) (stri
 }
 
 func (this *WSCBLockScanner) GetBalanceByAddress(address ...string) ([]*openwallet.Balance, error) {
-	//type addressBalance struct {
-	//	Address string
-	//	Index   uint64
-	//	Balance *openwallet.Balance
-	//}
-	//
-	//threadControl := make(chan int, 20)
-	//defer close(threadControl)
-	//resultChan := make(chan *addressBalance, 1024)
-	//defer close(resultChan)
-	//done := make(chan int, 1)
-	//count := len(address)
-	//resultBalance := make([]*openwallet.Balance, count)
-	//resultSaveFailed := false
-	////save result
-	//go func() {
-	//	for i := 0; i < count; i++ {
-	//		addr := <-resultChan
-	//		if addr.Balance != nil {
-	//			resultBalance[addr.Index] = addr.Balance
-	//		} else {
-	//			resultSaveFailed = true
-	//		}
-	//	}
-	//	done <- 1
-	//}()
-	//
-	//query := func(addr *addressBalance) {
-	//	threadControl <- 1
-	//	defer func() {
-	//		resultChan <- addr
-	//		<-threadControl
-	//	}()
-	//
-	//	balanceConfirmed, err := this.wm.WalletClient.GetAddrBalance2(AppendOxToAddress(addr.Address), "latest")
-	//	if err != nil {
-	//		this.wm.Log.Error("get address[", addr.Address, "] balance failed, err=", err)
-	//		return
-	//	}
-	//
-	//	balanceAll, err := this.wm.WalletClient.GetAddrBalance2(AppendOxToAddress(addr.Address), "pending")
-	//	if err != nil {
-	//		//this.wm.Log.Errorf("get address[%v] erc20 token balance failed, err=%v", address, err)
-	//		//return
-	//		balanceAll = balanceConfirmed
-	//	}
-	//
-	//	//		this.wm.Log.Debugf("got balanceAll of [%v] :%v", address, balanceAll)
-	//	balanceUnconfirmed := big.NewInt(0)
-	//	balanceUnconfirmed.Sub(balanceAll, balanceConfirmed)
-	//
-	//	balance := &openwallet.Balance{
-	//		Symbol:  this.wm.Symbol(),
-	//		Address: addr.Address,
-	//	}
-	//	confirmed, err := ConverWeiStringToEthDecimal(balanceConfirmed.String())
-	//	if err != nil {
-	//		this.wm.Log.Errorf("ConverWeiStringToEthDecimal confirmed balance failed, err=%v", err)
-	//		return
-	//	}
-	//	all, err := ConverWeiStringToEthDecimal(balanceAll.String())
-	//	if err != nil {
-	//		this.wm.Log.Errorf("ConverWeiStringToEthDecimal all balance failed, err=%v", err)
-	//		return
-	//	}
-	//
-	//	unconfirmed, err := ConverWeiStringToEthDecimal(balanceUnconfirmed.String())
-	//	if err != nil {
-	//		this.wm.Log.Errorf("ConverWeiStringToEthDecimal unconfirmed balance failed, err=%v", err)
-	//		return
-	//	}
-	//
-	//	balance.Balance = all.String()
-	//	balance.UnconfirmBalance = unconfirmed.String()
-	//	balance.ConfirmBalance = confirmed.String()
-	//	addr.Balance = balance
-	//}
-	//
-	//for i, _ := range address {
-	//	addrbl := &addressBalance{
-	//		Address: address[i],
-	//		Index:   uint64(i),
-	//	}
-	//	go query(addrbl)
-	//}
-	//
-	//<-done
-	//if resultSaveFailed {
-	//	return nil, errors.New("get balance of addresses failed.")
-	//}
-	//return resultBalance, nil
 	addrs := []AddrBalanceInf{}
 	for i, addr := range address {
 		addrs = append(addrs, &AddrBalance{
@@ -978,37 +887,6 @@ func (this *WSCBLockScanner) TransactionScanning(tx *BlockTransaction) (*Extract
 		return &result, nil
 	}
 
-	//FromSourceKey, fromExtractDataList, err := this.MakeFromExtractData(tx, tokenEvent)
-	//if err != nil {
-	//	this.wm.Log.Errorf("MakeFromExtractData failed, err=%v", err)
-	//	return nil, err
-	//}
-	//
-	//ToSourceKey, toExtractDataList, err := this.MakeToExtractData(tx, tokenEvent)
-	//if err != nil {
-	//	this.wm.Log.Errorf("MakeToExtractData failed, err=%v", err)
-	//	return nil, err
-	//}
-	//
-	//if FromSourceKey == ToSourceKey && FromSourceKey != "" {
-	//	for i, _ := range fromExtractDataList {
-	//		for j, _ := range toExtractDataList {
-	//			if fromExtractDataList[i].Transaction.To[0] == toExtractDataList[j].Transaction.To[0] {
-	//				fromExtractDataList[i].TxOutputs = toExtractDataList[j].TxOutputs
-	//			}
-	//		}
-	//	}
-	//
-	//	result.extractData[FromSourceKey] = fromExtractDataList
-	//} else if FromSourceKey != "" && ToSourceKey != "" {
-	//	result.extractData[FromSourceKey] = fromExtractDataList
-	//	result.extractData[ToSourceKey] = toExtractDataList
-	//} else if FromSourceKey != "" {
-	//	result.extractData[FromSourceKey] = fromExtractDataList
-	//} else if ToSourceKey != "" {
-	//	result.extractData[ToSourceKey] = toExtractDataList
-	//}
-
 	isTokenTransfer := false
 	if len(tokenEvent) > 0 {
 		isTokenTransfer = true
@@ -1143,6 +1021,14 @@ func (this *WSCBLockScanner) extractWscTransaction(tx *BlockTransaction, isToken
 	}
 
 	for _, extractData := range txExtractMap {
+
+		receipt, err := this.wm.WalletClient.WscGetTransactionReceipt(tx.Hash)
+		if err != nil {
+			continue
+		}
+		if receipt.Status != "0x0" {
+			status = "0"
+		}
 
 		tx := &openwallet.Transaction{
 			Fees:        feeprice,
