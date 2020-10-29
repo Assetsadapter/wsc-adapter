@@ -973,7 +973,7 @@ func isError(result *gjson.Result) error {
 		err error
 	)
 
-	if !result.Get("error").IsObject() {
+	if !result.Get("error").Exists() {
 
 		if !result.Get("result").Exists() {
 			return errors.New("Response is empty! ")
@@ -982,8 +982,8 @@ func isError(result *gjson.Result) error {
 		return nil
 	}
 
-	errInfo := fmt.Sprintf("[%d]%s",
-		result.Get("error.code").Int(),
+	errInfo := fmt.Sprintf("[%s]%s",
+		result.Get("error.code").String(),
 		result.Get("error.message").String())
 	err = errors.New(errInfo)
 
